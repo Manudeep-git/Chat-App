@@ -1,4 +1,4 @@
-import firebase from "firebase/app";
+import firebase from "firebase";
 // since firebase is huge module, we only import /app from it
 
 const firebaseConfig = {
@@ -11,6 +11,5 @@ const firebaseConfig = {
     measurementId: "G-C85KMQ3Q0T"
 };
 // Initialize Firebase
-const app = firebase.initializeApp(firebaseConfig);
-firebase.analytics();
-export default app;
+export const app = firebase.initializeApp(firebaseConfig);
+// firebase.analytics();
