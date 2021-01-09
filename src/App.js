@@ -1,33 +1,31 @@
 import React from "react"
 import 'rsuite/dist/styles/rsuite-default.css';
-import { Router, Switch, withRouter } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import './styles/main.scss';
-import { createBrowserHistory } from 'history';
+// import { createBrowserHistory } from 'history';
 import SignIn from "./pages/Signin";
 import PrivateRoute from './components/PrivateRoute';
 import Home from "./pages/Home";
 import PublicRoute from "./components/PublicRoute";
+import { ProfileProvider } from "./context/profilecontext";
 
-
+// const history1 = createBrowserHistory()
 
 function App() {
-  const history = createBrowserHistory()
 
   return (
-    <div className="App">
-      <Router history={history}>
-        <Switch>
-          {/* <Route exact='/' component={App} /> */}
-          <PublicRoute path="/signin" history={history} component={SignIn} />
-          {/* // Public Route */}
-          <PrivateRoute path='/home' component={Home} />
-          {/* {Everything from PrivateRoute will be redirected to Route} */}
-        </Switch>
-      </Router>
-    </div>
-  )
+    <ProfileProvider>
+      <Switch>
+        {/* <Route exact='/' component={App} /> */}
+        <PublicRoute path="/signin" component={SignIn} />
+        <PrivateRoute path="/" component={Home} />
+        {/* // Public Route */}
+        {/* {Everything from PrivateRoute will be redirected to Route} */}
+      </Switch>
+    </ProfileProvider>
+  );
 }
 
 
-export default withRouter(App);
+export default App;
 

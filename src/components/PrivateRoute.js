@@ -1,18 +1,27 @@
 import React from 'react'
 import { Redirect, Route } from 'react-router';
+import { Container, Loader } from 'rsuite';
+import { useProfile } from '../context/profilecontext';
 
 function PrivateRoute({ component, ...routeProps }) {
-    const profile = false;
+    const { profile, isLoading } = useProfile();
+    // useProfile custom hook used from profilecontext.js
+    console.log(profile)
 
-    if (!profile) {
-        return <Redirect to='/signin' />
+    // Loader is a spinner here
+    if (isLoading && !profile) {
+        return <Container>
+            <Loader center vertical size="md" content="loading" speed="normal" />
+        </Container>
     }
+
+    if (!profile && !isLoading) {
+        return <Redirect to="/signin" />;
+    }
+
     return (
-        <div>
-            <h1>Private rOUTE</h1>
-            <Route {...routeProps} component={component} />
-        </div>
-    )
+        <Route {...routeProps} component={component} />
+    );
 }
 
 export default PrivateRoute;

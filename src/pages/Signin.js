@@ -1,27 +1,27 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
+import firebase from 'firebase'
 import { Container, Grid, Panel, Row, Col, Icon, Button, Alert } from 'rsuite';
 // import { ToastContainer, toast } from 'react-toastify';
-import firebase from 'firebase/app'
 import { app } from '../config/firebase'
 // import 'react-toastify/dist/react-toastify.esm'
 
-function SignIn() {
+function SignIn({ ...routeProps }) {
     const auth = app.auth();
     const db = app.firestore();
-    let count = 1;
+    // let count = 1;
     const database = app.database();
+    const { history } = routeProps;
 
-    const signInProvider = async (provider) => {
+    const signInProvider = async provider => {
         try {
-            const { user, additionalUserInfo } = await auth.signInWithPopup(provider)
+            const { additionalUserInfo, user } = await auth.signInWithPopup(provider)
             if (additionalUserInfo.isNewUser) {
-                await database.ref(`/profiles/${user.uid}`).set({
+                database.ref(`/profiles/${user.uid}`).set({
                     name: user.displayName,
                     userid: user.uid,
-                    createdAt: firebase.database.ServerValue.TIMESTAMP
-                });
-                count += 1
+                    createdAt: firebase.database.ServerValue.TIMESTAMP,
+                })
             }
             //     db.collection("profiles").doc(user.displayName).set({
             //         userid: user.uid,
@@ -35,9 +35,10 @@ function SignIn() {
             // }
             // console.log(additionalUserInfo);
             // console.log(user);
-            Alert.success("Signed in successfully", 3000)
-        } catch (e) {
-            Alert.error(e);
+            Alert.success("Signed in", 3000);
+            // history.push('/home')
+        } catch (err) {
+            Alert.info(err.message, 3000);
         }
 
     }

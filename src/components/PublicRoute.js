@@ -1,18 +1,25 @@
 import React from 'react'
 import { Redirect, Route } from 'react-router';
+import { Container, Loader } from 'rsuite';
+import { useProfile } from '../context/profilecontext';
 
 function PublicRoute({ component, ...routeProps }) {
-    const profile = false;
+    const { profile, isLoading } = useProfile();
+    // useProfile custom hook used from profilecontext.js
 
-    if (profile) {
-        return <Redirect to='/home' />
+    if (isLoading && !profile) {
+        return <Container>
+            <Loader center vertical size="md" content="loading" speed="normal" />
+        </Container>
     }
 
+    if (profile && !isLoading) {
+        return <Redirect to="/" />
+    }
+
+
     return (
-        <div>
-            {console.log(routeProps)}
-            <Route {...routeProps} component={component} />
-        </div>
+        <Route {...routeProps} component={component} />
     )
 }
 
