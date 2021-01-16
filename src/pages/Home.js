@@ -1,10 +1,20 @@
 import React from 'react'
+import { Col, Grid, Row } from 'rsuite';
+import DashboardToggle from '../components/dashboard/DashboardToggle';
+// import { useProfile } from '../context/profilecontext'
+// import { app } from '../config/firebase'
+// import Sidebar from '../components/Sidebar';
 
-function Home() {
+function Home({ profile }) {
     return (
-        <div>
-            <h1>Home</h1>
-        </div>
+        <Grid fluid>
+            <Row>
+                <Col xs={24} md={8}>
+                    <h2>{profile.name}</h2>
+                    <DashboardToggle />
+                </Col>
+            </Row>
+        </Grid>
     )
 }
 

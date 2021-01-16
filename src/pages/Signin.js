@@ -23,16 +23,15 @@ function SignIn({ ...routeProps }) {
                     createdAt: firebase.database.ServerValue.TIMESTAMP,
                 })
             }
-            //     db.collection("profiles").doc(user.displayName).set({
-            //         userid: user.uid,
-            //         displayName: user.displayName
-            //     }).then(() => {
-            //         count += 1
-            //         console.log("user signed in");
-            //     }).catch((error) => {
-            //         console.log("error while signing in", error);
-            //     });
-            // }
+            // db.collection("profiles").doc(user.displayName).add({
+            //     userid: user.uid,
+            //     displayName: user.displayName
+            // }).then(() => {
+            //     // count += 1
+            //     console.log("user signed in");
+            // }).catch((error) => {
+            //     console.log("error while signing in", error);
+            // });
             // console.log(additionalUserInfo);
             // console.log(user);
             Alert.success("Signed in", 3000);
@@ -55,6 +54,7 @@ function SignIn({ ...routeProps }) {
     // const onOtpSignIn = () => {
     //     signInProvider(new firebase.auth.);
     // }
+
     return (
         <Container>
             <Grid className='mt-page'>
@@ -62,7 +62,7 @@ function SignIn({ ...routeProps }) {
                     <Col xs={24} md={12} mdOffset={6}>
                         <Panel>
                             <div className='text-center'>
-                                <h2>Welcome to Chat</h2>
+                                <h2>Welcome to Chat </h2>
                             </div>
                             <div className='mt-3'>
                                 <Button block color='blue' onClick={onFaceBookSignIn}>

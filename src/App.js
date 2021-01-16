@@ -1,7 +1,7 @@
 import React from "react"
 import 'rsuite/dist/styles/rsuite-default.css';
-import { Switch } from 'react-router-dom';
 import './styles/main.scss';
+import { Switch } from 'react-router-dom';
 // import { createBrowserHistory } from 'history';
 import SignIn from "./pages/Signin";
 import PrivateRoute from './components/PrivateRoute';

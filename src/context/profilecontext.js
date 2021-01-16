@@ -45,13 +45,14 @@ export const ProfileProvider = ({ children }) => {
             }
         })
         return () => {
-            authUnSub();
+            authUnSub(); // clean up
 
             if (userRef) {
                 userRef.off()
             }
         }
     }, [])
+
 
     // eslint-disable-next-line react/no-children-prop
     return (<ProfileContext.Provider value={{ profile, isLoading }}>

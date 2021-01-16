@@ -1,9 +1,10 @@
 import React from 'react'
-import { Redirect, Route } from 'react-router';
+import { Redirect } from 'react-router';
 import { Container, Loader } from 'rsuite';
 import { useProfile } from '../context/profilecontext';
+import Home from '../pages/Home';
 
-function PrivateRoute({ component, ...routeProps }) {
+function PrivateRoute() {
     const { profile, isLoading } = useProfile();
     // useProfile custom hook used from profilecontext.js
     console.log(profile)
@@ -20,7 +21,7 @@ function PrivateRoute({ component, ...routeProps }) {
     }
 
     return (
-        <Route {...routeProps} component={component} />
+        <Home profile={profile} />
     );
 }
 
