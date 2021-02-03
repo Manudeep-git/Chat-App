@@ -1,11 +1,10 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { app } from "../config/firebase"
+import {auth, database} from "../config/firebase"
 
 const ProfileContext = createContext();
 // create context
 
-const auth = app.auth();
-const database = app.database();
+
 
 // context provider - provider that provides children all it's context
 export const ProfileProvider = ({ children }) => {

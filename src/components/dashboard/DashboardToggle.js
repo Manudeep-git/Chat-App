@@ -1,22 +1,16 @@
 /* eslint-disable arrow-body-style */
-import React, { useState, useCallback } from 'react'
-import { Alert, Button, Drawer, Icon } from 'rsuite'
-import { app } from '../../config/firebase';
+/* eslint-disable */
+import React, { useCallback, /*useEffect*/ } from 'react'
+import { Alert, Button, Drawer, Icon, InputGroup, Modal, Input } from 'rsuite'
+import { app, auth, database } from '../../config/firebase';
 import Dashboard from '.';
+import RoomsList from '../../pages/RoomsList';
+import { useModalState } from '../../customHooks/CustomHooks';
 
 const DashboardToggle = () => {
-    const [isOpen, setIsOpen] = useState(false)
-    const open = useCallback(() => {
-        setIsOpen(true)
-    }, []);
-
-    const close = useCallback(() => {
-        setIsOpen(false)
-    }, []);
-
+    const { isOpen, open, close } = useModalState();
     const onSignOut = useCallback(() => {
-        app.auth().signOut();
-
+        auth.signOut();
         Alert.info("Signed out", 3000);
 
         close();
@@ -30,6 +24,9 @@ const DashboardToggle = () => {
             <Drawer show={isOpen} onHide={close} placement="left">
                 <Dashboard onSignOut={onSignOut} />
             </Drawer>
+            {/* <Button style={{ color: "grey" }} onClick={openModal}>
+                Create Room
+            </Button> */}
         </div>
     )
 }
